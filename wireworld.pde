@@ -82,9 +82,13 @@ void draw() {
         if (headDrawn && (i != headX || j != headY)) {
           cellState[cellStateIdx][i][j] = (mouseButton == LEFT) ? CELL_ELCTAIL : CELL_CNDCTR;
         } else {
-          headDrawn = true;
-          headX = i; headY = j;
-          cellState[cellStateIdx][i][j] = (mouseButton == LEFT) ? CELL_ELCHEAD : CELL_CNDCTR;
+          if (mouseButton == LEFT) {
+            headDrawn = true;
+            headX = i; headY = j;
+            cellState[cellStateIdx][i][j] = CELL_ELCHEAD;
+          } else {
+            cellState[cellStateIdx][i][j] = (cellState[cellStateIdx][i][j] == CELL_EMPTY) ? CELL_EMPTY : CELL_CNDCTR;
+          }
         }
       }
     }
